@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
+import matplotlib.pyplot as plt
 
 #fashion_mnist = keras.datasets.fashion_mnist
 mnist = tf.keras.datasets.mnist
@@ -36,7 +37,15 @@ print('Test accuracy:', test_acc)
 
 predictions = model.predict(test_images)
 
-print('First test image is: ', test_labels[0])
+for i in range(10):
 
-print('Model predicts that first test image is: ', np.argmax(predictions[0]))
+    print('Test image ' + str(i + 1) + ' is: ', test_labels[i])
+
+    print('Model predicts that test image ' + str(i + 1) + ' is: ', np.argmax(predictions[i]))
+
+    print('Displaying test image ' + str(i + 1))
+    plt.imshow(test_images[i])
+    plt.show()
+
+    print()
 
