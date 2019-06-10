@@ -3,14 +3,14 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
-#fashion_mnist = keras.datasets.fashion_mnist
-mnist = tf.keras.datasets.mnist
+fashion_mnist = keras.datasets.fashion_mnist
+#mnist = tf.keras.datasets.mnist
 
 # For fashion
-#(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
+(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
 
 # For numbers
-(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+#(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 
 # For fashion
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 
@@ -39,9 +39,9 @@ predictions = model.predict(test_images)
 
 for i in range(10):
 
-    print('Test image ' + str(i + 1) + ' is: ', test_labels[i])
+    print('Test image ' + str(i + 1) + ' is: ', class_names[test_labels[i]])
 
-    print('Model predicts that test image ' + str(i + 1) + ' is: ', np.argmax(predictions[i]))
+    print('Model predicts that test image ' + str(i + 1) + ' is: ', class_names[np.argmax(predictions[i])])
 
     print('Displaying test image ' + str(i + 1))
     plt.imshow(test_images[i])
