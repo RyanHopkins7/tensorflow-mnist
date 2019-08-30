@@ -3,21 +3,28 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
-fashion_mnist = keras.datasets.fashion_mnist
-#mnist = tf.keras.datasets.mnist
+class Model:
+    def __init__(self, fashionOrDigits):
+        pass
+    
+    def getFashionData(self):
+        fashion_mnist = keras.datasets.fashion_mnist
+        return fashion_mnist.load_data()
+    
+    def getDigitData(self):
+        digit_mnist = tf.keras.datasets.mnist
+        return digit_mnist.load_data()
 
-# For fashion
-(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
 
-# For numbers
-#(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+(train_images_digits, train_labels_digits), (test_images_digits, test_labels_digits) = mnist.load_data()
 
-# For fashion
-class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 
+class_names_fashion = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 
                'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
-train_images = train_images / 255.0
-test_images = test_images / 255.0
+train_images_fashion = train_images_fashion / 255.0
+test_images_fashion = test_images_fashion / 255.0
+train_images_digits = train_images_digits / 255.0
+test_images_digits = test_images_digits / 255.0
 
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(28, 28)),
@@ -30,23 +37,14 @@ model.compile(optimizer='adam',
              loss='sparse_categorical_crossentropy',
              metrics=['accuracy'])
 
-model.fit(train_images, train_labels, epochs=6)
+model.fit(train_images_fashion, train_labels_fashion, epochs=6)
 
-test_loss, test_acc = model.evaluate(test_images, test_labels)
+test_loss, test_acc = model.evaluate(test_images_fashion, test_labels_fashion)
 
-print('Test accuracy:', test_acc)
+print('Test accuracy on Fashion MNIST:', test_acc)
 
-predictions = model.predict(test_images)
+predictions = model.predict(test_images_fashion)
 
-for i in range(10):
 
-    print('Test image ' + str(i + 1) + ' is: ', class_names[test_labels[i]])
 
-    print('Model predicts that test image ' + str(i + 1) + ' is: ', class_names[np.argmax(predictions[i])])
-
-    print('Displaying test image ' + str(i + 1))
-    plt.imshow(test_images[i])
-    plt.show()
-
-    print()
 
