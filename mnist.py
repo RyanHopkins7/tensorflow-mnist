@@ -54,6 +54,8 @@ def createModel(fashionOrDigits):
         plot_value_array(i, predictions, test_labels)
     plt.show()
     
+# Plotting code from https://www.tensorflow.org/tutorials/keras/basic_classification    
+
 def plot_image(i, predictions_array, true_label, img, class_names):
   predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
   plt.grid(False)
