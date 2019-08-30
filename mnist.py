@@ -10,7 +10,7 @@ def createModel(fashionOrDigits):
         (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
         class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 
             'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
-    elif fashionOrDigits.upper == "DIGIT":
+    elif fashionOrDigits.upper == "DIGITS":
         digit_mnist = tf.keras.datasets.mnist
         (train_images, train_labels), (test_images, test_labels) = digit_mnist.load_data()
     else:
@@ -31,16 +31,19 @@ def createModel(fashionOrDigits):
             loss='sparse_categorical_crossentropy',
             metrics=['accuracy'])
     
+    print('Training on ', fashionOrDigits, ' MNIST')
+    
     model.fit(train_images, train_labels, epochs=6)
 
     test_loss, test_acc = model.evaluate(test_images, test_labels)
 
     print('Test accuracy on ', fashionOrDigits, ' MNIST:', test_acc)
 
-    predictions = model.predict(test_images_fashion)
+    predictions = model.predict(test_images)
 
 
-
+createModel("fashion")
+createModel("digits")
 
 
 
