@@ -4,13 +4,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def createModel(fashionOrDigits):
-    if fashionOrDigits.upper() == "FASHION":
+def create_model(fashion_or_digits):
+    if fashion_or_digits.upper() == "FASHION":
         fashion_mnist = tf.keras.datasets.fashion_mnist
         (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
         class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 
             'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
-    elif fashionOrDigits.upper() == "DIGITS":
+    elif fashion_or_digits.upper() == "DIGITS":
         digit_mnist = tf.keras.datasets.mnist
         (train_images, train_labels), (test_images, test_labels) = digit_mnist.load_data()
         class_names = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 
@@ -33,13 +33,13 @@ def createModel(fashionOrDigits):
             loss='sparse_categorical_crossentropy',
             metrics=['accuracy'])
     
-    print('Training on ', fashionOrDigits, ' MNIST')
+    print('Training on ', fashion_or_digits, ' MNIST')
     
     model.fit(train_images, train_labels, epochs=6)
 
     test_loss, test_acc = model.evaluate(test_images, test_labels)
 
-    print('Test accuracy on ', fashionOrDigits, ' MNIST:', test_acc)
+    print('Test accuracy on ', fashion_or_digits, ' MNIST:', test_acc)
 
     predictions = model.predict(test_images)
     
@@ -87,8 +87,8 @@ def plot_value_array(i, predictions_array, true_label):
   thisplot[predicted_label].set_color('red')
   thisplot[true_label].set_color('blue')
 
-createModel("fashion")
-createModel("digits")
+create_model("fashion")
+create_model("digits")
 
 
 
